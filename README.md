@@ -21,3 +21,32 @@ The code for this is on line 629 of GRITSBot_Main_ESP8266.cpp. Make sure that IP
 newfirmware.bin
 ```
 or whatever you like on that server.
+
+## Arduino folder structure
+```
+Arduino
+|_basic_firmware
+|	|_basic_firmware.ino (seperately saved, unnecssary)
+|_GRITSBOT_MESSAGES.py
+|_sendGRITSmessagesUDP.py
+|_udpMessages.py
+|_upload_to_pi.sh (references the basic_firmware folder in this directory)
+|_libraries (Arduino default library folder)
+	|_Adafruit_INA219
+	|_Adafruit_NeoPixel
+	|_ArduinoJson
+	|_GRITSBot_I2CInterface
+	|_GRITSBot_Main
+	|	|_GRITSBot_Main_ESP8266.cpp
+	|	|_GRITSBot_Main_ESP8266.h
+	|	|_examples
+	|		|_basic_firmware (Contains original example, shows as example in Arduino IDE)
+	|		|_random_walk
+	|_GRITSBot_Messages
+	|_GRITSBot_Motor
+	|	|_examples
+	|		|_basic_firmware(Contains original example, shows as example in Arduino IDE)
+	|		|_random_walk
+	|_GRITSBot_WiFiConfig
+	|_GRITSBot_WirelessInterface
+```
