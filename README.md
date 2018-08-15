@@ -14,6 +14,12 @@ to File>preferences>Additional Boards Manager URLs field in you arduino IDE to g
 
 For OTA capable updates, flash using the board NodeMCU 1.0 (12E). Also make sure that the wifi SSID and broadcast IP (IP of computer that will send and receive messages to and from UGVs) is set correctly in GRITSBot_WIFIConfig/WIFIConfig.h.
 
+To get the firmware from the Arduino IDE, go to:
+```
+Sketch>Export compiled Binary
+```
+The .bin file should then be in the sketch folder (you will probably have to save it outside the libraries folder)
+
 ## OTA Update Using HTTP server
 
 The code for this is on line 629 of GRITSBot_Main_ESP8266.cpp. Make sure that IP points to the http server on the network and that there is a file named 
@@ -26,7 +32,7 @@ or whatever you like on that server.
 ```
 Arduino
 |_basic_firmware
-|	|_basic_firmware.ino (seperately saved, unnecssary)
+|	|_basic_firmware.ino (seperately saved, for exporting .bin file)
 |_GRITSBOT_MESSAGES.py
 |_sendGRITSmessagesUDP.py
 |_udpMessages.py
