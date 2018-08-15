@@ -12,7 +12,7 @@ to File>preferences>Additional Boards Manager URLs field in you arduino IDE to g
 
 ## Flashing the mainboard
 
-For OTA capable updates, flash using the board NodeMCU 1.0 (12E). Also make sure that the wifi SSID and broadcast IP (IP of computer that will send and receive messages to and from UGVs) is set correctly in WIFIConfig.h.
+For OTA capable updates, flash using the board NodeMCU 1.0 (12E). Also make sure that the wifi SSID and broadcast IP (IP of computer that will send and receive messages to and from UGVs) is set correctly in GRITSBot_WIFIConfig/WIFIConfig.h.
 
 ## OTA Update Using HTTP server
 
