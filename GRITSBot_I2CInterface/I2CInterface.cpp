@@ -75,7 +75,27 @@ void I2CInterface::sendMessage(uint8_t msgType, float *data, uint8_t len, uint8_
      */
     Wire.beginTransmission(address);
     Wire.write(txBuffer, bufferSize);
-    Wire.endTransmission();
+    delay(1); //add delay to make sure motor board gets the message
+    uint8_t err = Wire.endTransmission(false);
+    switch (err) {
+      case 0:
+        Serial.println("I2C transmission successful");
+        break;
+      case 1:
+        Serial.println("Data too long to fit in transmit buffer");
+        break;
+      case 2:
+        Serial.println("Received NACK on transmit of address");
+        break;
+      case 3:
+        Serial.println("Received NACK on transmit of data");
+        break;
+      case 4:
+        Serial.println("Other error occured");
+        break;
+
+    }
+
   } else {
     /* Mainboard as I2C slave for debugging */
     Wire.write(txBuffer, bufferSize);
@@ -94,11 +114,14 @@ void I2CInterface::sendMessage(uint8_t msgType, float d1, float d2, float d3) {
 
 bool I2CInterface::receiveMessage(I2CMessage* msgOut, uint8_t address) {
   uint8_t i = 0;
+  delay(1);//allow motor board some time to digest
 
+  
   /* Request 9 byte long message from slave with given address
    * uint8_t msgType ... 1 byte
    * float   data    ... 2 * 4 bytes
    */
+
   if(isMaster_) {
     Wire.requestFrom(address, (uint8_t)9);
   }

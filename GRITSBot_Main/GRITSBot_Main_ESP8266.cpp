@@ -671,7 +671,7 @@ void GRITSBotMain::sendHeartbeatMessage() {
     if(printBatteryVoltage) {
       batteryVoltage_  = ina219_->getBusVoltage_V();
       Serial.print("Battery voltage: "); Serial.println(batteryVoltage_);
-      JSONSendMessage("Voltage",batteryVoltage_);
+      // JSONSendMessage("Voltage",batteryVoltage_);
     }
 
     if (!radio_->getHostIPStatus()) {
@@ -1087,6 +1087,7 @@ void GRITSBotMain::setVelocities(float v, float w) {
   v_.fval = v;
   w_.fval = w;
   ensureI2CBufferInit();
+  // sampleMotorBoardVelocities();
   I2C_->sendMessage(MSG_SET_VELOCITIES, v, w * 180 / M_PI);
   I2C_->sendMessage(MSG_GET_RPS,0.0,0.0);
   if(I2C_->receiveMessage(&I2CBuffer_)){
@@ -1096,8 +1097,6 @@ void GRITSBotMain::setVelocities(float v, float w) {
     float vals[2] = {I2CBuffer_.data_[0].fval, I2CBuffer_.data_[1].fval};
     JSONSendMessage(msgs, vals, 2);*/
   }
-
-
 }
 
 void GRITSBotMain::setVelocitiesMax(float vMax, float wMax) {

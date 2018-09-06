@@ -192,6 +192,9 @@ void GRITSBotMotor::requestEvent() {
   /* A request event requires a previous receive event to have occured
    * that sets the message type.
    */
+  if(I2CBuffer_.msgType_ != MSG_GET_RPS)
+    Serial.println(I2CBuffer_.msgType_);
+
   switch(I2CBuffer_.msgType_) {
     case(MSG_GET_VELOCITIES):
       i2c_.sendMessage(MSG_GET_VELOCITIES, v_, w_);
@@ -224,8 +227,7 @@ void GRITSBotMotor::requestEvent() {
       i2c_.sendMessage(MSG_GET_FIRMWARE_VERSION, getHardwareVersion(), 0.0);
       break;
     case(MSG_ECHO):
-      i2c_.sendMessage(MSG_ECHO, I2CBuffer_.data_[0].fval,
-                                 I2CBuffer_.data_[1].fval);
+      i2c_.sendMessage(MSG_ECHO, I2CBuffer_.data_[0].fval, I2CBuffer_.data_[1].fval);
       //Serial.println("Sending response");
       // i2c_.sendMessage(MSG_ECHO, 19.0, 83.0);
 
